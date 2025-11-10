@@ -23,15 +23,15 @@ HireLedger는 직업 소개소 직원이 근로자와 고용주를 연결하고,
 
 ### 2. 기술 스택
 
-| 구분           | 기술                |
-| ------------ | ----------------- |
-| 언어           | Java 21           |
-| 프레임워크        | Spring Boot 3.5.7 |
-| DB           | MySQL 8.0.33      |
-| Mapper | MyBatis 3.0.3     |
-| DB 마이그레이션    | Flyway            |
-| View         | JSP               |
-| 보안           | Spring Security   |
+| 구분           | 기술                    |
+| ------------ |-----------------------|
+| 언어           | Java 21               |
+| 프레임워크        | Spring Boot 3.5.7     |
+| DB           | MySQL 8.0.33          |
+| Mapper | MyBatis 3.0.3         |
+| DB 마이그레이션    | Flyway                |
+| View         | JSP                   |
+| 보안           | Spring Security 6.5.6 |
 
 
 ---
