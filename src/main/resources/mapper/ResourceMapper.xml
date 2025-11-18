@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.hireledger.mapper.ResourceMapper">
+    <select id="findAllResources" parameterType="string" resultType="com.example.hireledger.domain.entity.Resource">
+        SELECT *
+        FROM resource
+    </select>
+    <select id="findRoleByResource" parameterType="com.example.hireledger.domain.entity.Resource" resultType="com.example.hireledger.domain.entity.Role">
+        SELECT r.*
+        FROM role r
+        JOIN role_resource rr ON r.id = rr.role_id
+        WHERE rr.resource_id = #{id}
+    </select>
+
+</mapper>
