@@ -45,7 +45,7 @@ public class FormUserDetailsService implements UserDetailsService {
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
 
-        AccountRecord accountRecord = AccountRecord.from(account, roles);
+        AccountRecord accountRecord = AccountRecord.from(account);
 
         return new AccountContext(accountRecord, authorities);
     }

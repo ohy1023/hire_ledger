@@ -26,7 +26,7 @@ public class AccountContext implements UserDetails {
     }
     @Override
     public String getUsername() {
-        return accountRecord.email();
+        return accountRecord.username();
     }
     @Override
     public boolean isAccountNonExpired() {

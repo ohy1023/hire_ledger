@@ -37,10 +37,7 @@ public class SecurityConfig {
                 // 권한 없는 정적 리소스 허용
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/WEB-INF/**").permitAll()
-                        .requestMatchers("/", "/register", "/login").permitAll()
-                        .requestMatchers("/user/**").hasAuthority("ROLE_USER")
-                        .requestMatchers("/manager/**").hasAuthority("ROLE_MANAGER")
-                        .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers("/", "/login").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form

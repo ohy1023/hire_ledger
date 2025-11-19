@@ -21,12 +21,12 @@ public class AccountController {
         return "login";
     }
 
-    @GetMapping("/register")
+    @GetMapping("/admin/register")
     public String registerPage() {
         return "register";
     }
 
-    @PostMapping("/register")
+    @PostMapping("/admin/register")
     public String register(@ModelAttribute RegisterRecord registerRecord) {
         accountService.createAccount(registerRecord);
         return "redirect:/login";

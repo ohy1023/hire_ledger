@@ -19,6 +19,7 @@
         .register-container input[type="text"],
         .register-container input[type="email"],
         .register-container input[type="password"],
+        .register-container input[type="date"],
         .register-container select {
             width: 100%;
             padding: 10px;
@@ -43,20 +44,35 @@
     </style>
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
 <div class="register-container">
     <h2>회원가입</h2>
 
-    <form action="${pageContext.request.contextPath}/register" method="post">
+    <form action="${pageContext.request.contextPath}/admin/register" method="post">
         <input type="email" name="email" placeholder="이메일" required />
         <input type="password" name="password" placeholder="비밀번호" required />
         <input type="text" name="username" placeholder="이름" required />
-        <input type="text" name="tel" placeholder="전화번호" />
+        <input type="text" name="tel" placeholder="전화번호 (예: 010-1234-5678)" />
         <select name="gender">
             <option value="">성별 선택</option>
             <option value="MALE">남성</option>
             <option value="FEMALE">여성</option>
         </select>
+        <input type="date" name="birth_date" placeholder="생년월일" />
+        <input type="text" name="country" placeholder="국적" />
+        <input type="text" name="university" placeholder="대학명" />
+        <select name="work_type">
+            <option value="">근로 유형 선택</option>
+            <option value="FULL_TIME">정규직</option>
+            <option value="PART_TIME">파트타임</option>
+            <option value="CONTRACT">계약직</option>
+            <option value="INTERN">인턴</option>
+            <option value="FREELANCER">프리랜서</option>
+        </select>
+        <!-- 주소 -->
+        <input type="text" name="zipcode" placeholder="우편번호" />
+        <input type="text" name="address" placeholder="기본 주소" />
+        <input type="text" name="address_detail" placeholder="상세 주소" />
+
         <button type="submit">회원가입</button>
     </form>
 </div>
