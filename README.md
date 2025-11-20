@@ -60,3 +60,7 @@ src/main/resources
   └─ WEB-INF/views # JSP
  
 ```
+
+### 4. Trouble Shooting
+
+https://velog.io/@zvyg1023/%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EB%B2%94%EC%9C%84%EB%A5%BC-%EC%B5%9C%EC%86%8C%ED%99%94%ED%95%98%EB%A0%A4%EB%8B%A4-%EA%B2%AA%EC%9D%80-%EB%AC%B8%EC%A0%9C%EC%99%80-%ED%95%B4%EA%B2%B0-%EA%B3%BC%EC%A0%95-%EC%A0%95%EB%A6%AC
