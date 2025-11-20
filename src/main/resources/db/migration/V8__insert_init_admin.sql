@@ -1,3 +1,13 @@
+INSERT IGNORE INTO address (
+    zipcode,
+    address,
+    address_detail
+) VALUES (
+    08810,
+    "서울특별시 디지털로 52길 12",
+    "101동 1201호"
+);
+
 INSERT IGNORE INTO account (
     uid,
     username,
@@ -25,15 +35,20 @@ INSERT IGNORE INTO account (
     '대한민국',                         -- 국적
     '공주대학교',                        -- 대학
     'FULL_TIME',                        -- 근로 유형
-    NULL,                               -- 주소 (없으면 NULL)
+    (SELECT id FROM address
+         WHERE zipcode = 08810
+           AND address = '서울특별시 디지털로 52길 12'
+           AND address_detail = '101동 1201호'
+         LIMIT 1),
     NOW(),
     NOW()
 );
 
-INSERT IGNORE INTO account_role (
-    account_id,
-    role_id
-) VALUES (
-    1,
-    3
-);
+INSERT INTO account_role (account_id, role_id)
+VALUES ((SELECT id FROM account WHERE email='zvyg1023@naver.com' LIMIT 1), 1);
+
+INSERT INTO account_role (account_id, role_id)
+VALUES ((SELECT id FROM account WHERE email='zvyg1023@naver.com' LIMIT 1), 2);
+
+INSERT INTO account_role (account_id, role_id)
+VALUES ((SELECT id FROM account WHERE email='zvyg1023@naver.com' LIMIT 1), 3);

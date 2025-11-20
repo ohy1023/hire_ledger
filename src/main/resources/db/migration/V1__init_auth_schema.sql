@@ -16,12 +16,12 @@ CREATE TABLE account (
     password VARCHAR(255) NOT NULL COMMENT '비밀번호(암호화 저장)',
     email VARCHAR(150) NOT NULL UNIQUE COMMENT '사용자 이메일',
     tel VARCHAR(20) COMMENT '전화번호 (하이픈 포함, 예: 010-1234-5678)',
-    gender ENUM('MALE','FEMALE') COMMENT '성별',
+    gender VARCHAR(20) COMMENT '성별 (예: MALE, FEMALE 등)',
     active BOOLEAN DEFAULT TRUE COMMENT '계정 활성 여부',
     birth_date DATE COMMENT '생년월일',
     country VARCHAR(100) COMMENT '국적',
     university VARCHAR(200) COMMENT '대학명',
-    work_type ENUM('FULL_TIME','PART_TIME','CONTRACT','INTERN','FREELANCER') COMMENT '근로 유형',
+    work_type VARCHAR(30) COMMENT '근로 유형 (예: FULL_TIME, INTERN 등)',
     face_image_url VARCHAR(500) COMMENT '얼굴 이미지 URL',
     address_id BIGINT COMMENT '주소 ID(FK)',
     FOREIGN KEY (address_id) REFERENCES address(id) ON DELETE CASCADE,
@@ -33,7 +33,7 @@ CREATE TABLE account (
 -- 권한(Role)
 CREATE TABLE role (
     id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '권한 고유 ID',
-    role_name VARCHAR(50) NOT NULL UNIQUE COMMENT '권한명 (예: ROLE_ADMIN, ROLE_USER)',
+    role_type VARCHAR(20) NOT NULL UNIQUE COMMENT '권한명 (예: USER, MANAGER, ADMIN)',
     description VARCHAR(200) COMMENT '권한 설명'
 );
 

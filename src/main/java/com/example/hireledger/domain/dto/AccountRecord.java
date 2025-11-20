@@ -1,60 +1,49 @@
-//package com.example.hireledger.domain.dto;
-//
-//import com.example.hireledger.domain.entity.Account;
-//import com.example.hireledger.domain.enums.Gender;
-//import com.example.hireledger.domain.entity.Role;
-//
-//import java.io.Serializable;
-//import java.util.List;
-//import java.util.Set;
-//import java.util.UUID;
-//import java.util.stream.Collectors;
-//
-//public record AccountRecord(
-//        UUID uid,
-//        String username,
-//        String email,
-//        String password,
-//        String tel,
-//        Gender gender,
-//        boolean active,
-//        Set<String> roleNames // Role 객체 대신 이름만 가짐
-//) implements Serializable {
-//    public static AccountRecord from(Account account, List<Role> roleList) {
-//        return new AccountRecord(
-//                account.getUid(),
-//                account.getUsername(),
-//                account.getEmail(),
-//                account.getPassword(),
-//                account.getTel(),
-//                account.getGender(),
-//                account.isActive(),
-//                roleList.stream()
-//                        .map(Role::getRoleName)
-//                        .collect(Collectors.toSet())
-//        );
-//    }
-//
-//}
-
 package com.example.hireledger.domain.dto;
 
 import com.example.hireledger.domain.entity.Account;
+import com.example.hireledger.domain.entity.Address;
+import com.example.hireledger.domain.entity.Role;
+import com.example.hireledger.domain.enums.Gender;
+import com.example.hireledger.domain.enums.RoleType;
+import com.example.hireledger.domain.enums.WorkType;
+import lombok.Builder;
 
-import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
+@Builder
 public record AccountRecord(
-        UUID uid,
+        UUID accountUid,
         String username,
-        String password
-) implements Serializable {
+        String email,
+        String tel,
+        Gender gender,
+        LocalDate birthDate,
+        String country,
+        WorkType workType,
+        String faceUrl,
+        String address,
+        List<RoleType> roleTypes,
+        LocalDateTime createdAt
+) {
 
-    public static AccountRecord from(Account account) {
-        return new AccountRecord(
-                account.getUid(),
-                account.getEmail(),
-                account.getPassword()
-        );
+    public static AccountRecord from(Account account, Address address, List<Role> roles) {
+        return AccountRecord.builder()
+                .accountUid(account.getUid())
+                .username(account.getUsername())
+                .email(account.getEmail())
+                .tel(account.getTel())
+                .gender(account.getGender())
+                .birthDate(account.getBirthDate())
+                .country(account.getCountry())
+                .workType(account.getWorkType())
+                .faceUrl(account.getFaceUrl())
+                .address(address.toString())
+                .roleTypes(roles.stream().map(Role::getRoleType).toList())
+                .createdAt(account.getCreatedAt())
+                .build();
     }
-}
+
+    }

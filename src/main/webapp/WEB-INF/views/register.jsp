@@ -44,6 +44,7 @@
     </style>
 </head>
 <body>
+    <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <div class="register-container">
     <h2>회원가입</h2>
 
@@ -57,10 +58,10 @@
             <option value="MALE">남성</option>
             <option value="FEMALE">여성</option>
         </select>
-        <input type="date" name="birth_date" placeholder="생년월일" />
+        <input type="date" name="birthDate" placeholder="생년월일" />
         <input type="text" name="country" placeholder="국적" />
         <input type="text" name="university" placeholder="대학명" />
-        <select name="work_type">
+        <select name="workType">
             <option value="">근로 유형 선택</option>
             <option value="FULL_TIME">정규직</option>
             <option value="PART_TIME">파트타임</option>
@@ -68,10 +69,17 @@
             <option value="INTERN">인턴</option>
             <option value="FREELANCER">프리랜서</option>
         </select>
-        <!-- 주소 -->
+
         <input type="text" name="zipcode" placeholder="우편번호" />
         <input type="text" name="address" placeholder="기본 주소" />
-        <input type="text" name="address_detail" placeholder="상세 주소" />
+        <input type="text" name="addressDetail" placeholder="상세 주소" />
+
+        <label>권한 선택:</label>
+        <div class="role-box">
+        <label><input type="checkbox" name="roleTypes" value="USER"> USER</label>
+        <label><input type="checkbox" name="roleTypes" value="MANAGER"> MANAGER</label>
+        <label><input type="checkbox" name="roleTypes" value="ADMIN"> ADMIN</label>
+        </div>
 
         <button type="submit">회원가입</button>
     </form>

@@ -41,6 +41,7 @@
     </style>
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
 <div class="login-container">
     <h2>로그인</h2>
 

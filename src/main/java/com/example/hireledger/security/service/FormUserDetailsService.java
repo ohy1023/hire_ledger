@@ -4,7 +4,6 @@ package com.example.hireledger.security.service;
 import com.example.hireledger.domain.entity.Account;
 import com.example.hireledger.domain.entity.Role;
 import com.example.hireledger.domain.dto.AccountContext;
-import com.example.hireledger.domain.dto.AccountRecord;
 import com.example.hireledger.mapper.AccountMapper;
 import com.example.hireledger.mapper.AccountRoleMapper;
 import com.example.hireledger.mapper.RoleMapper;
@@ -41,12 +40,10 @@ public class FormUserDetailsService implements UserDetailsService {
         List<Role> roles = roleMapper.findRolesByIds(roleIds);
 
         List<GrantedAuthority> authorities = roles.stream()
-                .map(Role::getRoleName) // ex) "ROLE_ADMIN", "ROLE_USER"
+                .map(role -> role.getRoleType().getRoleName()) // ex) "ROLE_ADMIN", "ROLE_USER"
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
 
-        AccountRecord accountRecord = AccountRecord.from(account);
-
-        return new AccountContext(accountRecord, authorities);
+        return new AccountContext(account.getEmail(), account.getPassword(), authorities);
     }
 }

@@ -4,6 +4,7 @@
     <title>Title</title>
 </head>
 <body>
+    <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <p>DENIED 화면입니다.</p>
 
 </body>

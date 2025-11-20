@@ -37,7 +37,9 @@ public class FormAuthenticationProvider implements AuthenticationProvider {
             throw new SecretException("Invalid Secret");
         }
 
-        return new UsernamePasswordAuthenticationToken(accountContext.getAccountRecord(), null, accountContext.getAuthorities());
+        accountContext.eraseCredentials();
+
+        return new UsernamePasswordAuthenticationToken(accountContext, null, accountContext.getAuthorities());
     }
 
     @Override

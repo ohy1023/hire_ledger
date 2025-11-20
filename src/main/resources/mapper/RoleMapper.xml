@@ -6,7 +6,7 @@
     <select id="findByRoleName" parameterType="string" resultType="com.example.hireledger.domain.entity.Role">
         SELECT *
         FROM role r
-        WHERE r.role_name = #{roleName}
+        WHERE r.role_type = #{roleName}
     </select>
 
     <select id="findRolesByIds" resultType="com.example.hireledger.domain.entity.Role">

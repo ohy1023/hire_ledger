@@ -19,7 +19,13 @@
         email,
         tel,
         gender,
-        active
+        active,
+        birth_date,
+        country,
+        university,
+        work_type,
+        face_image_url,
+        address_id
         ) VALUES (
         #{uid},
         #{username},
@@ -27,7 +33,13 @@
         #{email},
         #{tel},
         #{gender},
-        #{active}
+        #{active},
+        #{birthDate},
+        #{country},
+        #{university},
+        #{workType},
+        #{faceUrl},
+        #{addressId}
         )
     </insert>
 

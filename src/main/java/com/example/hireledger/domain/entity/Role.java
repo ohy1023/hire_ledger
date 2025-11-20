@@ -1,14 +1,11 @@
 package com.example.hireledger.domain.entity;
 
+import com.example.hireledger.domain.enums.RoleType;
 import lombok.Data;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Data
 public class Role {
     private Long id;
-    private String roleName;
+    private RoleType roleType;
     private String description;
-    private Set<Resource> resources = new HashSet<>();
 }

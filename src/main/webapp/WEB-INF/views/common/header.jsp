@@ -101,9 +101,12 @@
                     </li>
                 </sec:authorize>
 
+                <sec:authorize access="hasRole('ADMIN')">
+                    <li><a href="<c:url value='/admin/register'/>">회원가입</a></li>
+                </sec:authorize>
+
                 <sec:authorize access="!isAuthenticated()">
                     <li><a href="<c:url value='/login'/>">로그인</a></li>
-                    <li><a href="<c:url value='/register'/>">회원가입</a></li>
                 </sec:authorize>
             </ul>
         </nav>
