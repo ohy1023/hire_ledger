@@ -8,6 +8,8 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 
 public class FormAccessDeniedHandler implements AccessDeniedHandler {
@@ -21,7 +23,10 @@ public class FormAccessDeniedHandler implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException {
 
-        String deniedUrl = errorPage + "?exception=" + accessDeniedException.getMessage();
+        String errorMessage = "Access Denied: " + accessDeniedException.getMessage();
+        String encodedMessage = URLEncoder.encode(errorMessage, StandardCharsets.UTF_8);
+
+        String deniedUrl = errorPage + "?message=" + encodedMessage;
         redirectStrategy.sendRedirect(request, response, deniedUrl);
 
     }

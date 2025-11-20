@@ -55,14 +55,9 @@ public class AccountServiceImpl implements AccountService {
     @Transactional
     protected void saveAccountWithRole(RegisterRecord registration, String hashedPassword,
                                        Address address) {
-        List<RoleType> roleTypes = registration.roleTypes();
         Long addressId = saveAddress(address);
         Long accountId = saveAccount(registration, hashedPassword, addressId);
-        for (RoleType roleType : roleTypes) {
-            Role role = fetchRoleByName(roleType);
-            linkAccountToRole(accountId, role.getId());
-        }
-
+        assignRolesToAccount(accountId, registration.roleTypes());
     }
 
     private Long saveAddress(Address address) {
@@ -78,6 +73,13 @@ public class AccountServiceImpl implements AccountService {
 
     private void linkAccountToRole(Long accountId, Long roleId) {
         accountRoleMapper.save(accountId, roleId);
+    }
+
+    private void assignRolesToAccount(Long accountId, List<RoleType> roleTypes) {
+        for (RoleType roleType : roleTypes) {
+            Role role = fetchRoleByName(roleType);
+            linkAccountToRole(accountId, role.getId());
+        }
     }
 
     @Override

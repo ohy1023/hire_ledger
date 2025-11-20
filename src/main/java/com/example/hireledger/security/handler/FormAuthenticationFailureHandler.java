@@ -12,6 +12,8 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationFa
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 @Component("failureHandler")
 public class FormAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
@@ -27,12 +29,12 @@ public class FormAuthenticationFailureHandler extends SimpleUrlAuthenticationFai
             errorMessage = "User not exists";
         } else if (exception instanceof CredentialsExpiredException) {
             errorMessage = "Expired password";
-
         } else if (exception instanceof SecretException) {
             errorMessage = "Invalid Secret key";
         }
 
-        setDefaultFailureUrl("/login?error=true&exception=" + errorMessage);
+        String encodedMessage = URLEncoder.encode(errorMessage, StandardCharsets.UTF_8);
+        setDefaultFailureUrl("/error?message=" + encodedMessage);
 
         super.onAuthenticationFailure(request, response, exception);
 

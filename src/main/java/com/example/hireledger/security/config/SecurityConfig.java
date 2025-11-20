@@ -60,7 +60,7 @@ public class SecurityConfig {
                 )
                 .authenticationProvider(authenticationProvider)
                 .exceptionHandling(exception -> exception
-                        .accessDeniedPage("/denied")
+                        .accessDeniedPage("/error")
                 )
         ;
 
