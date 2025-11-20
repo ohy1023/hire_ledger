@@ -1,6 +1,6 @@
 package com.example.hireledger.service;
 
-import com.example.hireledger.domain.dto.RegisterRecord;
+import com.example.hireledger.domain.dto.RegisterDto;
 import com.example.hireledger.domain.entity.Account;
 import com.example.hireledger.domain.entity.Address;
 import com.example.hireledger.domain.entity.Role;
@@ -26,7 +26,7 @@ public class AccountTransactionalServiceImpl implements AccountTransactionalServ
 
     @Override
     @Transactional
-    public void saveAccountWithRole(RegisterRecord registration, String hashedPassword, Address address) {
+    public void saveAccountWithRole(RegisterDto registration, String hashedPassword, Address address) {
         // 1. 주소 저장
         addressMapper.save(address);
         Long addressId = address.getId();
@@ -37,7 +37,7 @@ public class AccountTransactionalServiceImpl implements AccountTransactionalServ
         Long accountId = account.getId();
 
         // 3. 역할 매핑
-        for (RoleType roleType : registration.roleTypes()) {
+        for (RoleType roleType : registration.getRoleTypes()) {
             Role role = roleMapper.findByRoleName(roleType.name());
             accountRoleMapper.save(accountId, role.getId());
         }

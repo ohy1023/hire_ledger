@@ -89,9 +89,9 @@
 
                 <sec:authorize access="isAuthenticated()">
                     <li>
-                        <span class="user-info">
+                        <a href="<c:url value='/user/my-info'/>" class="user-info">
                             <sec:authentication property="principal.username"/>님
-                        </span>
+                        </a>
                     </li>
                     <li>
                         <form action="<c:url value='/logout'/>" method="post" class="logout-form">

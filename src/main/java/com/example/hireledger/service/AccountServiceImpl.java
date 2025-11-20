@@ -1,7 +1,7 @@
 package com.example.hireledger.service;
 
-import com.example.hireledger.domain.dto.AccountRecord;
-import com.example.hireledger.domain.dto.RegisterRecord;
+import com.example.hireledger.domain.dto.AccountDto;
+import com.example.hireledger.domain.dto.RegisterDto;
 import com.example.hireledger.domain.entity.Account;
 import com.example.hireledger.domain.entity.Address;
 import com.example.hireledger.domain.entity.Role;
@@ -42,9 +42,9 @@ public class AccountServiceImpl implements AccountService {
      * @param registration 회원가입 정보
      */
     @Override
-    public void createAccount(RegisterRecord registration) {
+    public void createAccount(RegisterDto registration) {
         // 암호화 작업 수행
-        String hashedPassword = encodePassword(registration.password());
+        String hashedPassword = encodePassword(registration.getPassword());
 
         // 주소 엔티티 생성
         Address userAddress = buildAddress(registration);
@@ -78,7 +78,7 @@ public class AccountServiceImpl implements AccountService {
      * @param registration 회원가입 정보
      * @return 주소 엔티티
      */
-    private Address buildAddress(RegisterRecord registration) {
+    private Address buildAddress(RegisterDto registration) {
         return registration.toAddress();
     }
 
@@ -90,7 +90,7 @@ public class AccountServiceImpl implements AccountService {
      * @param address 주소 엔티티
      */
     @Transactional
-    protected void saveAccountWithRole(RegisterRecord registration, String hashedPassword,
+    protected void saveAccountWithRole(RegisterDto registration, String hashedPassword,
                                        Address address) {
         // 1. 주소 저장
         Long addressId = saveAddress(address);
@@ -99,7 +99,7 @@ public class AccountServiceImpl implements AccountService {
         Long accountId = saveAccount(registration, hashedPassword, addressId);
 
         // 3. 계정-역할 매핑 저장
-        assignRolesToAccount(accountId, registration.roleTypes());
+        assignRolesToAccount(accountId, registration.getRoleTypes());
     }
 
     /**
@@ -121,7 +121,7 @@ public class AccountServiceImpl implements AccountService {
      * @param addressId 주소 ID
      * @return 저장된 계정의 ID
      */
-    private Long saveAccount(RegisterRecord registration, String hashedPassword, Long addressId) {
+    private Long saveAccount(RegisterDto registration, String hashedPassword, Long addressId) {
         Account newAccount = registration.toAccount(hashedPassword, addressId);
         accountMapper.save(newAccount);
         return newAccount.getId();
@@ -157,7 +157,7 @@ public class AccountServiceImpl implements AccountService {
      * @return 계정 정보 DTO
      */
     @Override
-    public AccountRecord getInfo(String email) {
+    public AccountDto getInfo(String email) {
         // 1. 계정 조회
         Account account = findAccountByEmail(email);
 
@@ -171,7 +171,7 @@ public class AccountServiceImpl implements AccountService {
         List<Role> roles = roleMapper.findRolesByIds(roleIds);
 
         // 5. Record로 변환하여 반환
-        return buildAccountRecord(account, address, roles);
+        return buildAccountDto(account, address, roles);
     }
 
     /**
@@ -212,7 +212,7 @@ public class AccountServiceImpl implements AccountService {
      * @param roles 역할 엔티티 목록
      * @return 계정 정보 DTO
      */
-    private AccountRecord buildAccountRecord(Account account, Address address, List<Role> roles) {
-        return AccountRecord.from(account, address, roles);
+    private AccountDto buildAccountDto(Account account, Address address, List<Role> roles) {
+        return AccountDto.from(account, address, roles);
     }
 }

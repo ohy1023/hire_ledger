@@ -1,14 +1,14 @@
 package com.example.hireledger.service;
 
 
-import com.example.hireledger.domain.dto.AccountRecord;
-import com.example.hireledger.domain.dto.RegisterRecord;
+import com.example.hireledger.domain.dto.AccountDto;
+import com.example.hireledger.domain.dto.RegisterDto;
 
 public interface AccountService {
 
-    void createAccount(RegisterRecord registerRecord);
+    void createAccount(RegisterDto registerDto);
 
-    AccountRecord getInfo(String email);
+    AccountDto getInfo(String email);
 
 }
 

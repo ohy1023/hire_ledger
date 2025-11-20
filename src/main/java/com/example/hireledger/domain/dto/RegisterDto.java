@@ -6,25 +6,31 @@ import com.example.hireledger.domain.enums.Gender;
 import com.example.hireledger.domain.enums.RoleType;
 import com.example.hireledger.domain.enums.WorkType;
 import com.example.hireledger.utils.UUIDGenerator;
+import lombok.Builder;
+import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public record RegisterRecord (
-        String username,
-        String email,
-        String password,
-        String tel,
-        Gender gender,
-        LocalDate birthDate,
-        String country,
-        String university,
-        WorkType workType,
-        List<RoleType> roleTypes,
-        String zipcode,
-        String address,
-        String addressDetail
-) {
+@Data
+@Builder
+public class RegisterDto {
+
+    private String username;
+    private String email;
+    private String password;
+    private String tel;
+    private Gender gender;
+    private LocalDate birthDate;
+    private String country;
+    private String university;
+    private WorkType workType;
+    private List<RoleType> roleTypes;
+    private String zipcode;
+    private String address;
+    private String addressDetail;
+
+    // Address 변환
     public Address toAddress() {
         return Address.builder()
                 .zipcode(zipcode)
@@ -33,6 +39,7 @@ public record RegisterRecord (
                 .build();
     }
 
+    // Account 변환
     public Account toAccount(String encodedPassword, Long addressId) {
         return Account.builder()
                 .uid(UUIDGenerator.generateUUIDv7())
@@ -48,7 +55,5 @@ public record RegisterRecord (
                 .workType(workType)
                 .addressId(addressId)
                 .build();
-
     }
-
 }

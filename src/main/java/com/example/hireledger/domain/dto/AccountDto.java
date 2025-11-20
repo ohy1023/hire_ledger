@@ -6,31 +6,34 @@ import com.example.hireledger.domain.entity.Role;
 import com.example.hireledger.domain.enums.Gender;
 import com.example.hireledger.domain.enums.RoleType;
 import com.example.hireledger.domain.enums.WorkType;
-import lombok.Builder;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+@Getter
 @Builder
-public record AccountRecord(
-        UUID accountUid,
-        String username,
-        String email,
-        String tel,
-        Gender gender,
-        LocalDate birthDate,
-        String country,
-        WorkType workType,
-        String faceUrl,
-        String address,
-        List<RoleType> roleTypes,
-        LocalDateTime createdAt
-) {
+@AllArgsConstructor
+@NoArgsConstructor
+public class AccountDto {
 
-    public static AccountRecord from(Account account, Address address, List<Role> roles) {
-        return AccountRecord.builder()
+    private UUID accountUid;
+    private String username;
+    private String email;
+    private String tel;
+    private Gender gender;
+    private LocalDate birthDate;
+    private String country;
+    private WorkType workType;
+    private String faceUrl;
+    private String address;
+    private List<RoleType> roleTypes;
+    private LocalDateTime createdAt;
+
+    public static AccountDto from(Account account, Address address, List<Role> roles) {
+        return AccountDto.builder()
                 .accountUid(account.getUid())
                 .username(account.getUsername())
                 .email(account.getEmail())
@@ -46,4 +49,10 @@ public record AccountRecord(
                 .build();
     }
 
+    public String getFormattedTel() {
+        if (tel != null && tel.length() == 10) {
+            return tel.replaceFirst("(\\d{3})(\\d{3})(\\d{4})", "$1-$2-$3");
+        }
+        return tel;
     }
+}
