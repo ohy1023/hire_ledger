@@ -1,6 +1,5 @@
 package com.example.hireledger.security.handler;
 
-import com.example.hireledger.security.exception.SecretException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -29,8 +28,6 @@ public class FormAuthenticationFailureHandler extends SimpleUrlAuthenticationFai
             errorMessage = "User not exists";
         } else if (exception instanceof CredentialsExpiredException) {
             errorMessage = "Expired password";
-        } else if (exception instanceof SecretException) {
-            errorMessage = "Invalid Secret key";
         }
 
         String encodedMessage = URLEncoder.encode(errorMessage, StandardCharsets.UTF_8);

@@ -46,7 +46,6 @@
     <h2>로그인</h2>
 
 <form action="<c:url value='/login'/>" method="post">
-    <input type="hidden" name="secret_key" value="secret"/>
     <label>Email:</label>
     <input type="text" name="username" required/>
 

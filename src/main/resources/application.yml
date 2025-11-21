@@ -32,7 +32,3 @@ mybatis:
 logging:
   level:
     com.example.hireledger: DEBUG
-
-security:
-  auth:
-    secret-key: ${SECRET_KEY}
