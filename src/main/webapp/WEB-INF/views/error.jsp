@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8" />
     <title>에러 발생</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/error.css">
+    <link rel="stylesheet" href="/css/error.css">
 </head>
 <body>
     <jsp:include page="/WEB-INF/views/common/header.jsp" />

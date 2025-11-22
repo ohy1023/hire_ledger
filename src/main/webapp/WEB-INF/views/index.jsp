@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8" />
     <title>HireLedger 홈</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/index.css">
+    <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
     <jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -26,7 +26,9 @@
             
             <sec:authorize access="!isAuthenticated()">
                 <p>
-                    HireLedger는 직원 관리와 인사 업무를 효율적으로 처리할 수 있는 통합 관리 시스템입니다.<br/>
+                    HireLedger는 직업 소개소 직원이 근로자와 고용주를 연결하고, 고용관계와 수수료를 체계적으로 관리할 수 있는 웹 기반 고용 관리 시스템입니다.<br/>
+                    소개소 직원은 근로자가 원하는 일자리에 맞춰 회사, 공장, 가정집 등 고용주와 연락을 주선하고 면접을 조율합니다.<br/>
+                    고용관계가 성립되면, 근로자와 고용주로부터 수수료를 받고 이를 기록 및 관리할 수 있습니다.<br/>
                     로그인하여 다양한 기능을 이용해보세요.
                 </p>
             </sec:authorize>

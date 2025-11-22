@@ -6,7 +6,7 @@ uri="http://www.springframework.org/tags/form" %>
   <head>
     <meta charset="UTF-8" />
     <title>내 정보</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mypage.css">
+    <link rel="stylesheet" href="<c:url value='/css/mypage.css'/>">
   </head>
   <body>
     <jsp:include page="/WEB-INF/views/common/header.jsp" />

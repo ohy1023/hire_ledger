@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // 성공 시
             alert(result.result); // "회원가입 성공!" 메시지 표시
-            window.location.href = '/test'; // 로그인 페이지 이동
+            window.location.href = '/'; // 로그인 페이지 이동
         })
         .catch(error => {
             console.error('회원가입 실패:', error);

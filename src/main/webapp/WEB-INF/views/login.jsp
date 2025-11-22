@@ -6,7 +6,7 @@ contentType="text/html; charset=UTF-8" %>
   <head>
     <meta charset="UTF-8" />
     <title>로그인</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
+    <link rel="stylesheet" href="/css/login.css">
   </head>
   <body>
     <jsp:include page="/WEB-INF/views/common/header.jsp" />

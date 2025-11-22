@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>회원가입</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/registerAccount.css">
+    <link rel="stylesheet" href="/css/registerAccount.css">
 </head>
 <body>
     <jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -54,7 +54,6 @@
             <button type="submit" id="submitBtn">회원가입</button>
         </form>
     </div>
-
-    <script src="${pageContext.request.contextPath}/js/registerAccount.js"></script>
+    <script src="/js/registerAccount.js"></script>
 </body>
 </html>
