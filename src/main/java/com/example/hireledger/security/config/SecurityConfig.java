@@ -32,6 +32,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 // 권한 없는 정적 리소스 허용
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/resources/**").permitAll()
                         .requestMatchers("/WEB-INF/**").permitAll()
                         .requestMatchers("/", "/login").permitAll()
                         .anyRequest().authenticated()

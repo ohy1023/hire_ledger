@@ -2,11 +2,11 @@ package com.example.hireledger.service;
 
 
 import com.example.hireledger.domain.dto.AccountDto;
-import com.example.hireledger.domain.dto.RegisterDto;
+import com.example.hireledger.domain.dto.RegisterAccountDto;
 
 public interface AccountService {
 
-    void createAccount(RegisterDto registerDto);
+    void createAccount(RegisterAccountDto registerAccountDto);
 
     AccountDto getInfo(String email);
 

@@ -8,4 +8,6 @@ public interface AccountMapper {
     Account findByEmail(String email);
 
     void save(Account account);
+
+    boolean existsByEmail(String email);
 }

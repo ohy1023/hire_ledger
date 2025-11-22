@@ -1,11 +1,13 @@
 package com.example.hireledger.service;
 
 import com.example.hireledger.domain.dto.AccountDto;
-import com.example.hireledger.domain.dto.RegisterDto;
+import com.example.hireledger.domain.dto.RegisterAccountDto;
 import com.example.hireledger.domain.entity.Account;
 import com.example.hireledger.domain.entity.Address;
 import com.example.hireledger.domain.entity.Role;
 import com.example.hireledger.domain.enums.RoleType;
+import com.example.hireledger.exception.AppException;
+import com.example.hireledger.exception.ErrorCode;
 import com.example.hireledger.mapper.AccountMapper;
 import com.example.hireledger.mapper.AccountRoleMapper;
 import com.example.hireledger.mapper.AddressMapper;
@@ -15,7 +17,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -42,7 +43,12 @@ public class AccountServiceImpl implements AccountService {
      * @param registration 회원가입 정보
      */
     @Override
-    public void createAccount(RegisterDto registration) {
+    public void createAccount(RegisterAccountDto registration) {
+        // email 중복 확인
+        if (accountMapper.existsByEmail(registration.getEmail())) {
+            throw new AppException(ErrorCode.DUPLICATE_EMAIL);
+        }
+
         // 암호화 작업 수행
         String hashedPassword = encodePassword(registration.getPassword());
 
@@ -78,76 +84,8 @@ public class AccountServiceImpl implements AccountService {
      * @param registration 회원가입 정보
      * @return 주소 엔티티
      */
-    private Address buildAddress(RegisterDto registration) {
+    private Address buildAddress(RegisterAccountDto registration) {
         return registration.toAddress();
-    }
-
-    /**
-     * 계정, 주소, 역할을 데이터베이스에 저장합니다.
-     *
-     * @param registration 회원가입 정보
-     * @param hashedPassword 암호화된 비밀번호
-     * @param address 주소 엔티티
-     */
-    @Transactional
-    protected void saveAccountWithRole(RegisterDto registration, String hashedPassword,
-                                       Address address) {
-        // 1. 주소 저장
-        Long addressId = saveAddress(address);
-
-        // 2. 계정 저장
-        Long accountId = saveAccount(registration, hashedPassword, addressId);
-
-        // 3. 계정-역할 매핑 저장
-        assignRolesToAccount(accountId, registration.getRoleTypes());
-    }
-
-    /**
-     * 주소를 데이터베이스에 저장합니다.
-     *
-     * @param address 주소 엔티티
-     * @return 저장된 주소의 ID
-     */
-    private Long saveAddress(Address address) {
-        addressMapper.save(address);
-        return address.getId();
-    }
-
-    /**
-     * 계정을 데이터베이스에 저장합니다.
-     *
-     * @param registration 회원가입 정보
-     * @param hashedPassword 암호화된 비밀번호
-     * @param addressId 주소 ID
-     * @return 저장된 계정의 ID
-     */
-    private Long saveAccount(RegisterDto registration, String hashedPassword, Long addressId) {
-        Account newAccount = registration.toAccount(hashedPassword, addressId);
-        accountMapper.save(newAccount);
-        return newAccount.getId();
-    }
-
-    /**
-     * 계정과 역할을 연결합니다.
-     *
-     * @param accountId 계정 ID
-     * @param roleId 역할 ID
-     */
-    private void linkAccountToRole(Long accountId, Long roleId) {
-        accountRoleMapper.save(accountId, roleId);
-    }
-
-    /**
-     * 계정에 여러 역할을 할당합니다.
-     *
-     * @param accountId 계정 ID
-     * @param roleTypes 역할 타입 목록
-     */
-    private void assignRolesToAccount(Long accountId, List<RoleType> roleTypes) {
-        for (RoleType roleType : roleTypes) {
-            Role role = fetchRoleByName(roleType);
-            linkAccountToRole(accountId, role.getId());
-        }
     }
 
     /**

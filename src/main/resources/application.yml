@@ -7,6 +7,10 @@ spring:
     view:
       prefix: /WEB-INF/views/
       suffix: .jsp
+    static-path-pattern: /**
+  web:
+    resources:
+      static-locations: classpath:/static/
   session:
     store-type: jdbc
   datasource:
