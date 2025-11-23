@@ -1,14 +1,9 @@
-package com.example.hireledger.mapper;
+package com.example.hireledger.repository.account;
 
 import com.example.hireledger.domain.entity.Account;
-import org.apache.ibatis.annotations.Mapper;
-
 import java.util.Optional;
 
-@Mapper
-public interface AccountMapper {
+public interface AccountRepository {
     Optional<Account> findByEmail(String email);
-
     void save(Account account);
-
 }

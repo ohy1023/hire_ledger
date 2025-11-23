@@ -1,7 +1,7 @@
 package com.example.hireledger.controller;
 
 import com.example.hireledger.domain.dto.AccountDto;
-import com.example.hireledger.service.AccountService;
+import com.example.hireledger.service.account.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;

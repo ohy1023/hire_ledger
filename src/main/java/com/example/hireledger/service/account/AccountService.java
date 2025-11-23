@@ -1,4 +1,4 @@
-package com.example.hireledger.service;
+package com.example.hireledger.service.account;
 
 
 import com.example.hireledger.domain.dto.AccountDto;

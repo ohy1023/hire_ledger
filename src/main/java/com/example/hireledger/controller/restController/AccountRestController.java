@@ -2,7 +2,7 @@ package com.example.hireledger.controller.restController;
 
 import com.example.hireledger.domain.dto.ApiResponse;
 import com.example.hireledger.domain.dto.RegisterAccountDto;
-import com.example.hireledger.service.AccountService;
+import com.example.hireledger.service.account.AccountService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

@@ -1,17 +1,18 @@
-package com.example.hireledger.service;
+package com.example.hireledger.service.account.impl;
 
 import com.example.hireledger.domain.dto.AccountDto;
 import com.example.hireledger.domain.dto.RegisterAccountDto;
 import com.example.hireledger.domain.entity.Account;
 import com.example.hireledger.domain.entity.Address;
 import com.example.hireledger.domain.entity.Role;
-import com.example.hireledger.domain.enums.RoleType;
 import com.example.hireledger.exception.AppException;
-import com.example.hireledger.exception.ErrorCode;
-import com.example.hireledger.mapper.AccountMapper;
-import com.example.hireledger.mapper.AccountRoleMapper;
-import com.example.hireledger.mapper.AddressMapper;
-import com.example.hireledger.mapper.RoleMapper;
+import com.example.hireledger.repository.account.AccountRepository;
+import com.example.hireledger.repository.accoutRole.AccountRoleRepository;
+import com.example.hireledger.repository.address.AddressRepository;
+import com.example.hireledger.repository.role.RoleRepository;
+import com.example.hireledger.service.account.AccountService;
+import com.example.hireledger.service.account.AccountTransactionalService;
+import com.example.hireledger.service.account.assembler.AccountAssembler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Primary;
@@ -19,6 +20,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import static com.example.hireledger.exception.ErrorCode.*;
 
 /**
  * 계정 관리 서비스 구현체
@@ -31,10 +34,11 @@ import java.util.List;
 public class AccountServiceImpl implements AccountService {
 
     private final PasswordEncoder passwordEncoder;
-    private final AccountMapper accountMapper;
-    private final AddressMapper addressMapper;
-    private final RoleMapper roleMapper;
-    private final AccountRoleMapper accountRoleMapper;
+    private final AccountRepository accountRepository;
+    private final AddressRepository addressRepository;
+    private final RoleRepository roleRepository;
+    private final AccountRoleRepository accountRoleRepository;
+    private final AccountAssembler accountAssembler;
     private final AccountTransactionalService accountTransactionalService;
 
     /**
@@ -45,48 +49,14 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void createAccount(RegisterAccountDto registration) {
         // email 중복 확인
-        if (accountMapper.existsByEmail(registration.getEmail())) {
-            throw new AppException(ErrorCode.DUPLICATE_EMAIL);
-        }
-
-        // 암호화 작업 수행
-        String hashedPassword = encodePassword(registration.getPassword());
+        validateEmailNotExists(registration.getEmail());
 
         // 주소 엔티티 생성
-        Address userAddress = buildAddress(registration);
+        Address userAddress = accountAssembler.toAddress(registration);
 
-        accountTransactionalService.saveAccountWithRole(registration, hashedPassword, userAddress);
+        accountTransactionalService.saveAccountWithRole(registration, userAddress);
     }
 
-    /**
-     * 평문 비밀번호를 암호화합니다.
-     *
-     * @param rawPassword 평문 비밀번호
-     * @return 암호화된 비밀번호
-     */
-    private String encodePassword(String rawPassword) {
-        return passwordEncoder.encode(rawPassword);
-    }
-
-    /**
-     * 역할 타입으로 역할 엔티티를 조회합니다.
-     *
-     * @param roleType 역할 타입
-     * @return 역할 엔티티
-     */
-    private Role fetchRoleByName(RoleType roleType) {
-        return roleMapper.findByRoleName(roleType.name());
-    }
-
-    /**
-     * 회원가입 정보에서 주소 엔티티를 생성합니다.
-     *
-     * @param registration 회원가입 정보
-     * @return 주소 엔티티
-     */
-    private Address buildAddress(RegisterAccountDto registration) {
-        return registration.toAddress();
-    }
 
     /**
      * 이메일로 계정 정보를 조회합니다.
@@ -106,10 +76,21 @@ public class AccountServiceImpl implements AccountService {
         List<Long> roleIds = findAccountRoleByAccountId(account.getId());
 
         // 4. 역할 엔티티 목록 조회
-        List<Role> roles = roleMapper.findRolesByIds(roleIds);
+        List<Role> roles = roleRepository.findRolesByIds(roleIds);
 
         // 5. Record로 변환하여 반환
         return buildAccountDto(account, address, roles);
+    }
+
+    /**
+     * 이메일 중복 여부를 검사하고, 이미 존재하면 예외를 던집니다.
+     *
+     * @param email 검사할 이메일
+     */
+    private void validateEmailNotExists(String email) {
+        if (accountRepository.findByEmail(email).isPresent()) {
+            throw new AppException(DUPLICATE_EMAIL);
+        }
     }
 
     /**
@@ -119,7 +100,7 @@ public class AccountServiceImpl implements AccountService {
      * @return 계정 엔티티
      */
     private Account findAccountByEmail(String email) {
-        return accountMapper.findByEmail(email);
+        return accountRepository.findByEmail(email).orElseThrow(() -> new AppException(ACCOUNT_NOT_FOUND));
     }
 
     /**
@@ -129,7 +110,7 @@ public class AccountServiceImpl implements AccountService {
      * @return 주소 엔티티
      */
     private Address findAddressById(Long addressId) {
-        return addressMapper.findById(addressId);
+        return addressRepository.findById(addressId);
     }
 
     /**
@@ -139,7 +120,7 @@ public class AccountServiceImpl implements AccountService {
      * @return 역할 ID 목록
      */
     private List<Long> findAccountRoleByAccountId(Long accountId) {
-        return accountRoleMapper.findRolesByAccountId(accountId);
+        return accountRoleRepository.findRolesByAccountId(accountId);
     }
 
     /**
@@ -147,7 +128,7 @@ public class AccountServiceImpl implements AccountService {
      *
      * @param account 계정 엔티티
      * @param address 주소 엔티티
-     * @param roles 역할 엔티티 목록
+     * @param roles   역할 엔티티 목록
      * @return 계정 정보 DTO
      */
     private AccountDto buildAccountDto(Account account, Address address, List<Role> roles) {

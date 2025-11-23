@@ -30,10 +30,8 @@ public class FormUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        Account account = accountMapper.findByEmail(username);
-        if (account == null) {
-            throw new UsernameNotFoundException("No user found with username: " + username);
-        }
+        Account account = accountMapper.findByEmail(username)
+                .orElseThrow(() -> new UsernameNotFoundException("No user found with username: " + username));
 
         List<Long> roleIds = accountRoleMapper.findRolesByAccountId(account.getId());
 

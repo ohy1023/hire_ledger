@@ -1,8 +1,10 @@
 package com.example.hireledger.domain.entity;
 
 import com.example.hireledger.domain.enums.Gender;
-import com.example.hireledger.domain.enums.WorkType;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -12,20 +14,16 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Account {
+public class Employer {
     private Long id;
     private UUID uid;
-    private String username;
-    private String password;
-    private String email;
+    private String name;
+    private LocalDate birthDate;
     private String tel;
     private Gender gender;
-    private boolean active;
-    private LocalDate birthDate;
-    private String country;
-    private String faceUrl;
-    private String university;
-    private WorkType workType;
+    private String type;
+    private String note;
+    private Long accountId;
     private Long addressId;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

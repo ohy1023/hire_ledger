@@ -69,30 +69,4 @@ public class RegisterAccountDto {
     @Size(max = 255, message = "상세 주소는 255자를 초과할 수 없습니다.")
     private String addressDetail;
 
-    // Address 변환
-    public Address toAddress() {
-        return Address.builder()
-                .zipcode(zipcode)
-                .address(address)
-                .addressDetail(addressDetail)
-                .build();
-    }
-
-    // Account 변환
-    public Account toAccount(String encodedPassword, Long addressId) {
-        return Account.builder()
-                .uid(UUIDGenerator.generateUUIDv7())
-                .email(email)
-                .username(username)
-                .tel(tel)
-                .gender(gender)
-                .password(encodedPassword)
-                .active(true)
-                .birthDate(birthDate)
-                .country(country)
-                .university(university)
-                .workType(workType)
-                .addressId(addressId)
-                .build();
-    }
 }

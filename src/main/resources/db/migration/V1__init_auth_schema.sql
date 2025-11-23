@@ -24,7 +24,7 @@ CREATE TABLE account (
     work_type VARCHAR(30) COMMENT '근로 유형 (예: FULL_TIME, INTERN 등)',
     face_image_url VARCHAR(500) COMMENT '얼굴 이미지 URL',
     address_id BIGINT COMMENT '주소 ID(FK)',
-    FOREIGN KEY (address_id) REFERENCES address(id) ON DELETE CASCADE,
+    FOREIGN KEY (address_id) REFERENCES address(id) ON DELETE SET NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '계정 생성 시간',
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '계정 정보 수정 시간',
     deleted_at TIMESTAMP DEFAULT NULL COMMENT '계정 삭제 시간(Soft Delete)'
