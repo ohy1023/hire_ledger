@@ -53,6 +53,10 @@ src/main/java
      │    ├─ entity/        # DB 매핑 엔티티
      │    ├─ dto/           # Controller ↔ Service DTO
      │    └─ enums/         # Gender, PaymentType 등
+     ├─ exception/           # REST API용 예외 처리
+     │    ├─ ApiException.java        # 공통 API 예외
+     │    ├─ GlobalExceptionHandler.java # @ControllerAdvice 예외 처리
+     │    └─ ErrorCode.java          # 오류 코드 정의
      ├─ mapper/             # MyBatis Mapper 인터페이스
      ├─ repository/         # DB 접근 Repository
      ├─ service/            
