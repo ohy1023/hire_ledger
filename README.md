@@ -21,14 +21,19 @@ HireLedger는 직업 소개소 직원이 근로자와 고용주를 연결하고,
 
 ---
 
-### 2. 기술 스택
+### 3. ERD
+
+![img.png](src/main/img/hire_ledger_erd.png)
+
+
+### 4. 기술 스택
 
 | 구분           | 기술                    |
 | ------------ |-----------------------|
 | 언어           | Java 21               |
 | 프레임워크        | Spring Boot 3.5.7     |
 | DB           | MySQL 8.0.33          |
-| Mapper | MyBatis 3.0.3         |
+| Mapper | MyBatis 3.5.14        |
 | DB 마이그레이션    | Flyway                |
 | View         | JSP                   |
 | 보안           | Spring Security 6.5.6 |
@@ -36,31 +41,39 @@ HireLedger는 직업 소개소 직원이 근로자와 고용주를 연결하고,
 
 ---
 
-### 3. 프로젝트 구조
+### 5. 프로젝트 구조
 
 ```
 src/main/java
  └─ com.example.hireledger
      ├─ security/           # Security 설정
-     ├─ controller/         # JSP 컨트롤러
+     ├─ controller/          # JSP 컨트롤러
+     │    └─ restcontroller/ # REST API 컨트롤러
      ├─ domain/
      │    ├─ entity/        # DB 매핑 엔티티
      │    ├─ dto/           # Controller ↔ Service DTO
      │    └─ enums/         # Gender, PaymentType 등
      ├─ mapper/             # MyBatis Mapper 인터페이스
-     ├─ service/            # 서비스 계층 (인터페이스 + Impl)
+     ├─ repository/         # DB 접근 Repository
+     ├─ service/            
+     │    ├─ assembler/     # DTO ↔ Entity 변환 등 어셈블러
+     │    └─ impl/          # 서비스 구현체
      └─ util/               # 공통 유틸 (UUID, 암호화 등)
      
 src/main/resources
  ├─ db/migration/          # Flyway 마이그레이션
  ├─ mapper/                # MyBatis XML
+ ├─ static/                
+ │    ├─ css/              # CSS 파일
+ │    └─ js/               # JS 파일
  └─ application.yml        # Spring Boot 설정
  
- src/main/webapp
-  └─ WEB-INF/views # JSP
+src/main/webapp
+ └─ WEB-INF/views           # JSP
+
  
 ```
 
-### 4. Trouble Shooting
+### 6. Trouble Shooting
 
 [트랜잭션 미적용 오류 해결](https://velog.io/@zvyg1023/%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EB%B2%94%EC%9C%84%EB%A5%BC-%EC%B5%9C%EC%86%8C%ED%99%94%ED%95%98%EB%A0%A4%EB%8B%A4-%EA%B2%AA%EC%9D%80-%EB%AC%B8%EC%A0%9C%EC%99%80-%ED%95%B4%EA%B2%B0-%EA%B3%BC%EC%A0%95-%EC%A0%95%EB%A6%AC)
