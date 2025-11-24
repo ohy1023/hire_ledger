@@ -1,11 +1,24 @@
+:root {
+  --primary: #00ce9a;
+  --primary-dark: #00b387;
+  --primary-tint: #e6fff7;
+  --text-main: #1f2a30;
+  --text-muted: #6d7a81;
+  --background: #f8fbfb;
+  --card: #ffffff;
+  --border: #e3ecea;
+  --shadow-soft: 0 10px 40px rgba(31, 42, 48, 0.08);
+}
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--background);
   margin: 0;
   padding: 0;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  color: var(--text-main);
 }
 
 .main-wrapper {
@@ -20,15 +33,15 @@ body {
   max-width: 800px;
   width: 100%;
   padding: 50px;
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--card);
   border-radius: 20px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-soft);
   text-align: center;
+  border: 1px solid var(--border);
 }
 
 .welcome-container h1 {
-  color: #667eea;
+  color: var(--primary);
   font-size: 48px;
   font-weight: 700;
   margin-bottom: 20px;
@@ -36,14 +49,14 @@ body {
 }
 
 .welcome-container h2 {
-  color: #333;
+  color: var(--text-main);
   font-size: 24px;
   font-weight: 500;
   margin-bottom: 30px;
 }
 
 .welcome-container p {
-  color: #666;
+  color: var(--text-muted);
   font-size: 18px;
   line-height: 1.6;
   margin-bottom: 40px;
@@ -58,31 +71,34 @@ body {
 
 .feature-card {
   padding: 30px 20px;
-  background: #f8f9fa;
+  background: var(--background);
   border-radius: 15px;
-  border-left: 4px solid #667eea;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--primary);
   transition: all 0.2s ease;
 }
 
 .feature-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 5px 20px rgba(102, 126, 234, 0.2);
+  box-shadow: 0 5px 20px rgba(0, 206, 154, 0.2);
+  background: var(--card);
 }
 
 .feature-card .icon {
   font-size: 40px;
   margin-bottom: 15px;
+  color: var(--primary);
 }
 
 .feature-card h3 {
-  color: #667eea;
+  color: var(--primary);
   font-size: 20px;
   font-weight: 600;
   margin-bottom: 10px;
 }
 
 .feature-card p {
-  color: #666;
+  color: var(--text-muted);
   font-size: 14px;
   margin: 0;
 }
@@ -108,26 +124,27 @@ body {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 206, 154, 0.35);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 6px 20px rgba(0, 179, 135, 0.45);
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.9);
-  color: #667eea;
-  border: 2px solid #667eea;
+  background: #ffffff;
+  color: var(--primary);
+  border: 2px solid var(--primary);
 }
 
 .btn-secondary:hover {
-  background: #667eea;
-  color: white;
+  background: var(--primary);
+  color: #ffffff;
 }
+
 
 @media (max-width: 768px) {
   .welcome-container {

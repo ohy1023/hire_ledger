@@ -1,11 +1,23 @@
 /* registerAccount.css */
 
+:root {
+    --primary: #00ce9a;
+    --primary-dark: #00b387;
+    --background: #f8fbfb;
+    --card: #ffffff;
+    --border: #e3ecea;
+    --text-main: #1f2a30;
+    --text-muted: #6d7a81;
+    --shadow-soft: 0 12px 32px rgba(31, 42, 48, 0.08);
+}
+
 /* 기본 스타일 */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background);
     margin: 0;
     padding: 0;
+    color: var(--text-main);
 }
 
 /* 회원가입 컨테이너 */
@@ -13,15 +25,16 @@ body {
     width: 400px;
     margin: 80px auto;
     padding: 30px;
-    background-color: #fff;
+    background-color: var(--card);
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-soft);
+    border: 1px solid var(--border);
 }
 
 .register-container h2 {
     text-align: center;
     margin-bottom: 20px;
-    color: #333;
+    color: var(--primary);
 }
 
 /* 폼 입력 필드 */
@@ -34,34 +47,38 @@ body {
     padding: 10px;
     margin-bottom: 15px;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border);
     box-sizing: border-box;
     font-size: 14px;
+    background-color: #ffffff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .register-container input:focus,
 .register-container select:focus {
     outline: none;
-    border-color: #28a745;
-    box-shadow: 0 0 5px rgba(40, 167, 69, 0.3);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(0, 206, 154, 0.2);
 }
 
 /* 제출 버튼 */
 .register-container button {
     width: 100%;
     padding: 10px;
-    background-color: #28a745;
-    color: white;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: #ffffff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
     font-weight: bold;
-    transition: background-color 0.3s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 6px 18px rgba(0, 206, 154, 0.3);
 }
 
 .register-container button:hover {
-    background-color: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(0, 179, 135, 0.35);
 }
 
 .register-container button:disabled {
@@ -76,6 +93,7 @@ body {
     padding: 10px;
     border-radius: 5px;
     font-size: 14px;
+    border: 1px solid var(--border);
 }
 
 .error {
@@ -94,9 +112,9 @@ body {
 .role-box {
     margin-bottom: 15px;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border);
     border-radius: 5px;
-    background-color: #f9f9f9;
+    background-color: var(--background);
 }
 
 .role-box label {
@@ -116,7 +134,7 @@ body {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
-    color: #333;
+    color: var(--text-main);
 }
 
 /* 반응형 디자인 */

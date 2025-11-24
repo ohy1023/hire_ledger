@@ -1,11 +1,23 @@
+:root {
+  --primary: #00ce9a;
+  --primary-dark: #00b387;
+  --background: #f8fbfb;
+  --card: #ffffff;
+  --border: #e3ecea;
+  --text-main: #1f2a30;
+  --text-muted: #6d7a81;
+  --shadow-soft: 0 12px 32px rgba(31, 42, 48, 0.08);
+}
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--background);
   margin: 0;
   padding: 0;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  color: var(--text-main);
 }
 
 .mypage-wrapper {
@@ -19,16 +31,16 @@ body {
 .my-info-container {
   width: 500px;
   padding: 40px;
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--card);
   border-radius: 20px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border);
 }
 
 .my-info-container h2 {
   text-align: center;
   margin-bottom: 30px;
-  color: #667eea;
+  color: var(--primary);
   font-size: 32px;
   font-weight: 700;
   letter-spacing: -0.5px;
@@ -38,7 +50,7 @@ body {
   text-align: center;
   margin-bottom: 30px;
   padding-bottom: 30px;
-  border-bottom: 2px solid #f0f0f0;
+  border-bottom: 2px solid var(--border);
 }
 
 .profile-image-wrapper {
@@ -52,43 +64,43 @@ body {
   height: 150px;
   border-radius: 50%;
   object-fit: cover;
-  border: 4px solid #667eea;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-  background: #f0f0f0;
+  border: 4px solid var(--primary);
+  box-shadow: 0 4px 15px rgba(0, 206, 154, 0.3);
+  background: #f2f6f5;
 }
 
 .profile-image-placeholder {
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: #ffffff;
   font-size: 48px;
-  border: 4px solid #667eea;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  border: 4px solid var(--primary);
+  box-shadow: 0 4px 15px rgba(0, 206, 154, 0.3);
   margin: 0 auto;
 }
 
 .image-upload-btn {
   display: inline-block;
   padding: 10px 20px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: #ffffff;
   border: none;
   border-radius: 12px;
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 206, 154, 0.35);
 }
 
 .image-upload-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 6px 20px rgba(0, 179, 135, 0.45);
 }
 
 .image-upload-btn input[type='file'] {
@@ -102,27 +114,29 @@ body {
 
 .info-item {
   padding: 15px;
-  background: #f8f9fa;
+  background: var(--background);
   border-radius: 12px;
-  border-left: 4px solid #667eea;
+  border-left: 4px solid var(--primary);
+  border: 1px solid var(--border);
   transition: all 0.2s ease;
 }
 
 .info-item:hover {
-  background: #f0f0f0;
+  background: var(--card);
   transform: translateX(5px);
+  box-shadow: 0 6px 18px rgba(0, 206, 154, 0.15);
 }
 
 .info-label {
   font-weight: 600;
-  color: #667eea;
+  color: var(--primary);
   font-size: 14px;
   margin-bottom: 5px;
   display: block;
 }
 
 .info-value {
-  color: #333;
+  color: var(--text-main);
   font-size: 15px;
   word-break: break-word;
 }
@@ -130,8 +144,8 @@ body {
 .role-badge {
   display: inline-block;
   padding: 4px 12px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: #ffffff;
   border-radius: 20px;
   font-size: 12px;
   font-weight: 600;
@@ -149,8 +163,8 @@ body {
 .edit-btn {
     display: inline-block;
     padding: 12px 24px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: #ffffff;
     border-radius: 12px;
     font-weight: 600;
     text-decoration: none;
@@ -159,22 +173,24 @@ body {
 
 .edit-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 6px 20px rgba(0, 179, 135, 0.45);
 }
 
 .delete-btn {
     padding: 12px 24px;
     background: #e74c3c;
-    color: white;
+    color: #ffffff;
     border-radius: 12px;
     font-weight: 600;
     border: none;
     cursor: pointer;
     transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.25);
 }
 
 .delete-btn:hover {
     background: #c0392b;
+    transform: translateY(-2px);
 }
 
 @media (max-width: 600px) {

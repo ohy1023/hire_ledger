@@ -1,11 +1,22 @@
+:root {
+  --primary: #00ce9a;
+  --primary-dark: #00b387;
+  --background: #f8fbfb;
+  --card: #ffffff;
+  --border: #e3ecea;
+  --text-main: #1f2a30;
+  --shadow-soft: 0 12px 32px rgba(31, 42, 48, 0.08);
+}
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--background);
   margin: 0;
   padding: 0;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  color: var(--text-main);
 }
 
 .error-wrapper {
@@ -20,10 +31,10 @@ body {
   max-width: 600px;
   width: 100%;
   padding: 50px;
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--card);
   border-radius: 20px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border);
   text-align: center;
 }
 
@@ -48,7 +59,7 @@ body {
 }
 
 .error-container h2 {
-  color: #333;
+  color: var(--text-main);
   font-size: 24px;
   font-weight: 500;
   margin-bottom: 30px;
@@ -86,25 +97,25 @@ body {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 206, 154, 0.35);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 6px 20px rgba(0, 179, 135, 0.45);
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.9);
-  color: #667eea;
-  border: 2px solid #667eea;
+  background: #ffffff;
+  color: var(--primary);
+  border: 2px solid var(--primary);
 }
 
 .btn-secondary:hover {
-  background: #667eea;
-  color: white;
+  background: var(--primary);
+  color: #ffffff;
 }
 
 @media (max-width: 600px) {

@@ -1,11 +1,23 @@
+:root {
+  --primary: #00ce9a;
+  --primary-dark: #00b387;
+  --background: #f8fbfb;
+  --card: #ffffff;
+  --border: #e3ecea;
+  --text-main: #1f2a30;
+  --text-muted: #6d7a81;
+  --shadow-soft: 0 10px 30px rgba(31, 42, 48, 0.08);
+}
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--background);
   margin: 0;
   padding: 0;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  color: var(--text-main);
 }
 
 .login-wrapper {
@@ -19,16 +31,16 @@ body {
 .login-container {
   width: 420px;
   padding: 40px;
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--card);
   border-radius: 20px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border);
 }
 
 .login-container h2 {
   text-align: center;
   margin-bottom: 30px;
-  color: #667eea;
+  color: var(--primary);
   font-size: 32px;
   font-weight: 700;
   letter-spacing: -0.5px;
@@ -42,7 +54,7 @@ body {
   display: block;
   margin-bottom: 8px;
   font-weight: 600;
-  color: #333;
+  color: var(--text-main);
   font-size: 14px;
 }
 
@@ -52,24 +64,25 @@ body {
   padding: 14px 16px;
   margin-bottom: 0;
   border-radius: 12px;
-  border: 2px solid #e0e0e0;
+  border: 2px solid var(--border);
   font-size: 15px;
   transition: all 0.2s ease;
   box-sizing: border-box;
+  background: #fefefe;
 }
 
 .login-container input[type='text']:focus,
 .login-container input[type='password']:focus {
   outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(0, 206, 154, 0.15);
 }
 
 .login-container button {
   width: 100%;
   padding: 14px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: #ffffff;
   border: none;
   border-radius: 12px;
   cursor: pointer;
@@ -77,12 +90,12 @@ body {
   font-weight: 600;
   transition: all 0.2s ease;
   margin-top: 10px;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 206, 154, 0.35);
 }
 
 .login-container button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 6px 20px rgba(0, 179, 135, 0.45);
 }
 
 .login-container button:active {
@@ -111,14 +124,14 @@ body {
   height: 18px;
   margin: 0;
   cursor: pointer;
-  accent-color: #667eea;
+  accent-color: var(--primary);
 }
 
 .remember-me label {
   margin: 0;
   font-size: 14px;
   font-weight: 500;
-  color: #666;
+  color: var(--text-muted);
   cursor: pointer;
 }
 
