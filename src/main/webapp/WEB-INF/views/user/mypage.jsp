@@ -33,10 +33,6 @@ uri="http://www.springframework.org/tags/form" %>
               </c:otherwise>
             </c:choose>
           </div>
-          <label for="profileImageInput" class="image-upload-btn">
-            프로필 이미지 변경
-            <input type="file" id="profileImageInput" accept="image/*" />
-          </label>
         </div>
 
         <div class="info-grid">
@@ -104,44 +100,18 @@ uri="http://www.springframework.org/tags/form" %>
       </div>
     </div>
 
-    <div class="delete-account-wrapper">
+    <div class="account-actions-wrapper">
+        <!-- 회원정보 수정 버튼 -->
+        <a href="<c:url value='/user/edit-info'/>" class="edit-btn">
+            회원정보 수정
+        </a>
+
+        <!-- 계정 탈퇴 버튼 -->
         <form action="<c:url value='/user/delete-account'/>" method="post"
               onsubmit="return confirm('정말 계정을 탈퇴하시겠습니까? 복구는 불가능합니다.');">
             <button type="submit" class="delete-btn">계정 탈퇴</button>
         </form>
     </div>
 
-    <script>
-      document
-        .getElementById('profileImageInput')
-        .addEventListener('change', function (e) {
-          const file = e.target.files[0];
-          if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-              const placeholder = document.getElementById('profilePlaceholder');
-              const existingImage = document.getElementById('profileImage');
-
-              if (placeholder) {
-                placeholder.style.display = 'none';
-              }
-
-              if (existingImage) {
-                existingImage.src = e.target.result;
-              } else {
-                const img = document.createElement('img');
-                img.id = 'profileImage';
-                img.src = e.target.result;
-                img.className = 'profile-image';
-                img.alt = '프로필 이미지';
-                document
-                  .querySelector('.profile-image-wrapper')
-                  .appendChild(img);
-              }
-            };
-            reader.readAsDataURL(file);
-          }
-        });
-    </script>
   </body>
 </html>
