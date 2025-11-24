@@ -83,6 +83,18 @@ public class AccountServiceImpl implements AccountService {
     }
 
     /**
+     * 이메일로 계정을 탈퇴합니다.
+     *
+     * @param email 이메일
+     */
+    @Override
+    public void deleteAccount(String email) {
+        Account account = findAccountByEmail(email);
+
+        accountTransactionalService.deleteAccount(account.getId());
+    }
+
+    /**
      * 이메일 중복 여부를 검사하고, 이미 존재하면 예외를 던집니다.
      *
      * @param email 검사할 이메일

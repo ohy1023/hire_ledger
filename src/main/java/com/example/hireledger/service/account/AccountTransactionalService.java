@@ -5,4 +5,6 @@ import com.example.hireledger.domain.entity.Address;
 
 public interface AccountTransactionalService {
     void saveAccountWithRole(RegisterAccountDto registration, Address address);
+
+    void deleteAccount(Long accountId);
 }

@@ -104,6 +104,13 @@ uri="http://www.springframework.org/tags/form" %>
       </div>
     </div>
 
+    <div class="delete-account-wrapper">
+        <form action="<c:url value='/user/delete-account'/>" method="post"
+              onsubmit="return confirm('정말 계정을 탈퇴하시겠습니까? 복구는 불가능합니다.');">
+            <button type="submit" class="delete-btn">계정 탈퇴</button>
+        </form>
+    </div>
+
     <script>
       document
         .getElementById('profileImageInput')

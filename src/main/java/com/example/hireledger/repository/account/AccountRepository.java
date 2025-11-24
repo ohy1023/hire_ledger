@@ -6,4 +6,5 @@ import java.util.Optional;
 public interface AccountRepository {
     Optional<Account> findByEmail(String email);
     void save(Account account);
+    void deleteById(Long id);
 }

@@ -22,4 +22,9 @@ public class AccountRepositoryImpl implements AccountRepository {
     public void save(Account account) {
         accountMapper.save(account);
     }
+
+    @Override
+    public void deleteById(Long id) {
+        accountMapper.deleteById(id);
+    }
 }

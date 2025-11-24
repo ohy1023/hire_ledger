@@ -45,6 +45,11 @@ public class AccountTransactionalServiceImpl implements AccountTransactionalServ
         log.info("계정 생성 완료 - accountId: {}, email: {}", accountId, registration.getEmail());
     }
 
+    @Override
+    public void deleteAccount(Long AccountId) {
+        accountRepository.deleteById(AccountId);
+    }
+
     /**
      * 주소를 저장하고 ID를 반환
      */

@@ -49,4 +49,11 @@
         WHERE email = #{email}
     </select>
 
+    <update id="deleteById" parameterType="long">
+        UPDATE account
+        SET deleted_at = NOW(),
+        active = false
+        WHERE id = #{id}
+    </update>
+
 </mapper>

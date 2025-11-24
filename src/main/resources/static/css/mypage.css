@@ -139,6 +139,35 @@ body {
   margin-top: 5px;
 }
 
+.delete-account-wrapper {
+    text-align: center;
+    margin-top: 30px;
+}
+
+
+.delete-btn {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 12px 22px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.25s ease, transform 0.1s ease;
+}
+
+
+.delete-btn:hover {
+    background-color: #c0392b;
+    transform: translateY(-1px);
+}
+
+
+.delete-btn:active {
+    transform: translateY(0);
+}
+
 @media (max-width: 600px) {
   .my-info-container {
     width: 100%;

@@ -10,5 +10,7 @@ public interface AccountService {
 
     AccountDto getInfo(String email);
 
+    void deleteAccount(String email);
+
 }
 
