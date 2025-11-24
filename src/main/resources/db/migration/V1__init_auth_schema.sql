@@ -17,7 +17,6 @@ CREATE TABLE account (
     email VARCHAR(150) NOT NULL UNIQUE COMMENT '사용자 이메일',
     tel VARCHAR(20) COMMENT '전화번호 (하이픈 포함, 예: 010-1234-5678)',
     gender VARCHAR(20) COMMENT '성별 (예: MALE, FEMALE 등)',
-    active BOOLEAN DEFAULT TRUE COMMENT '계정 활성 여부',
     birth_date DATE COMMENT '생년월일',
     country VARCHAR(100) COMMENT '국적',
     university VARCHAR(200) COMMENT '대학명',

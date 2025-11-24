@@ -33,7 +33,6 @@ public class AccountAssemblerImpl implements AccountAssembler {
                 .tel(req.getTel())
                 .gender(req.getGender())
                 .password(passwordEncoder.encode(req.getPassword()))
-                .active(true)
                 .birthDate(req.getBirthDate())
                 .country(req.getCountry())
                 .university(req.getUniversity())

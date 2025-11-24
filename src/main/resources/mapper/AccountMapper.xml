@@ -19,7 +19,6 @@
         email,
         tel,
         gender,
-        active,
         birth_date,
         country,
         university,
@@ -33,7 +32,6 @@
         #{email},
         #{tel},
         #{gender},
-        #{active},
         #{birthDate},
         #{country},
         #{university},
@@ -51,8 +49,7 @@
 
     <update id="deleteById" parameterType="long">
         UPDATE account
-        SET deleted_at = NOW(),
-        active = false
+        SET deleted_at = NOW()
         WHERE id = #{id}
     </update>
 

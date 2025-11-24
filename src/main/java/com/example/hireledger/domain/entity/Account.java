@@ -20,7 +20,6 @@ public class Account {
     private String email;
     private String tel;
     private Gender gender;
-    private boolean active;
     private LocalDate birthDate;
     private String country;
     private String faceUrl;
