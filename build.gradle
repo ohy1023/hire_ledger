@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.5.7'
+    id 'org.springframework.boot' version '4.0.0'
     id 'io.spring.dependency-management' version '1.1.7'
 }
 
@@ -10,7 +10,7 @@ description = 'HireLedger'
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+        languageVersion = JavaLanguageVersion.of(25)
     }
 }
 
@@ -26,38 +26,37 @@ repositories {
 
 dependencies {
     // Spring Core
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'org.springframework.security:spring-security-taglibs:6.5.6'
+    implementation 'org.springframework.boot:spring-boot-starter-web:4.0.0'
+    implementation 'org.springframework.boot:spring-boot-starter-validation:4.0.0'
+    implementation 'org.springframework.boot:spring-boot-starter-security:4.0.0'
+    implementation 'org.springframework.security:spring-security-taglibs:7.0.0'
+    implementation 'org.springframework.boot:spring-boot-devtools:4.0.0'
+    implementation 'org.springframework.session:spring-session-jdbc:4.0.0'
 
-    // Dev & Lombok
+    // Lombok
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
-    implementation 'org.springframework.boot:spring-boot-devtools'
 
     // Persistence
-    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
-    implementation 'com.mysql:mysql-connector-j'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.5'
+    implementation 'com.mysql:mysql-connector-j:9.5.0'
 
     // Migration
-    implementation 'org.flywaydb:flyway-core'
-    implementation 'org.flywaydb:flyway-mysql'
+    implementation 'org.flywaydb:flyway-core:11.17.1'
+    implementation 'org.flywaydb:flyway-mysql:11.17.1'
 
     // JSP / JSTL
-    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
-    implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api'
-    implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl'
+    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:11.0.14'
+    implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.2'
 
     // Test
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:4.0.0'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
     // uuid v7
     implementation 'com.github.f4b6a3:uuid-creator:5.3.2'
 
-    implementation 'org.springframework.session:spring-session-jdbc'
+    implementation 'software.amazon.awssdk:s3:2.39.2'
 
 }
 tasks.named('test') {

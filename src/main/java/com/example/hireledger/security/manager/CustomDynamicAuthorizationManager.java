@@ -5,10 +5,12 @@ import com.example.hireledger.security.service.DynamicAuthorizationService;
 import com.example.hireledger.mapper.ResourceMapper;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import org.jspecify.annotations.Nullable;
 import org.springframework.http.server.PathContainer;
 import org.springframework.security.authorization.AuthorityAuthorizationManager;
 import org.springframework.security.authorization.AuthorizationDecision;
 import org.springframework.security.authorization.AuthorizationManager;
+import org.springframework.security.authorization.AuthorizationResult;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.access.expression.WebExpressionAuthorizationManager;
 import org.springframework.security.web.access.intercept.RequestAuthorizationContext;
@@ -25,7 +27,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CustomDynamicAuthorizationManager implements AuthorizationManager<RequestAuthorizationContext> {
     List<RequestMatcherEntry<AuthorizationManager<RequestAuthorizationContext>>> mappings;
-    private static final AuthorizationDecision DENY = new AuthorizationDecision(false);
+    private static final AuthorizationResult DENY = new AuthorizationDecision(false);
+
     private final ResourceMapper resourceMapper;
     DynamicAuthorizationService dynamicAuthorizationService;
 
@@ -57,26 +60,26 @@ public class CustomDynamicAuthorizationManager implements AuthorizationManager<R
     }
 
     @Override
-    public AuthorizationDecision check(Supplier<Authentication> authentication, RequestAuthorizationContext request) {
-
-        for (RequestMatcherEntry<AuthorizationManager<RequestAuthorizationContext>> mapping : this.mappings) {
-
-            RequestMatcher matcher = mapping.getRequestMatcher();
-            RequestMatcher.MatchResult matchResult = matcher.matcher(request.getRequest());
-
-            if (matchResult.isMatch()) {
-                AuthorizationManager<RequestAuthorizationContext> manager = mapping.getEntry();
-                return manager.check(authentication,
-                        new RequestAuthorizationContext(request.getRequest(), matchResult.getVariables()));
-            }
-        }
-        return DENY;
+    public void verify(Supplier<? extends @Nullable Authentication> authentication, RequestAuthorizationContext object) {
+        AuthorizationManager.super.verify(authentication, object);
     }
 
     @Override
-    public void verify(Supplier<Authentication> authentication, RequestAuthorizationContext object) {
-        AuthorizationManager.super.verify(authentication, object);
+    public @Nullable AuthorizationResult authorize(Supplier<? extends @Nullable Authentication> authentication, RequestAuthorizationContext object) {
+        for (RequestMatcherEntry<AuthorizationManager<RequestAuthorizationContext>> mapping : mappings) {
+            RequestMatcher requestMatcher = mapping.getRequestMatcher();
+
+            RequestMatcher.MatchResult matchResult = requestMatcher.matcher(object.getRequest());
+
+            if (matchResult.isMatch()) {
+                AuthorizationManager<RequestAuthorizationContext> manager = mapping.getEntry();
+                return manager.authorize(authentication, new RequestAuthorizationContext(object.getRequest(), matchResult.getVariables()));
+            }
+        }
+
+        return DENY;
     }
+
 
     private AuthorizationManager<RequestAuthorizationContext> customAuthorizationManager(String role) {
         if (role.startsWith("ROLE")) {
@@ -85,5 +88,6 @@ public class CustomDynamicAuthorizationManager implements AuthorizationManager<R
             return new WebExpressionAuthorizationManager(role);
         }
     }
+
 
 }

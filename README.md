@@ -30,13 +30,14 @@ HireLedger는 직업 소개소 직원이 근로자와 고용주를 연결하고,
 
 | 구분           | 기술                    |
 | ------------ |-----------------------|
-| 언어           | Java 21               |
-| 프레임워크        | Spring Boot 3.5.7     |
+| 언어           | Java 25               |
+| 프레임워크        | Spring Boot 4.0.0     |
+| 빌드 도구       | Gradle 9.2.1          |
 | DB           | MySQL 8.0.33          |
 | Mapper | MyBatis 3.5.14        |
 | DB 마이그레이션    | Flyway                |
 | View         | JSP                   |
-| 보안           | Spring Security 6.5.6 |
+| 보안           | Spring Security 7.0.o |
 
 
 ---

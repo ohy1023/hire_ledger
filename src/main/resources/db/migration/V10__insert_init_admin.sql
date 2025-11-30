@@ -26,7 +26,7 @@ INSERT IGNORE INTO account (
     UNHEX(REPLACE(UUID(), '-', '')),  -- UUID (BINARY(16) 형식)
     '관리자',                         -- 이름
     'zvyg1023@naver.com',             -- 이메일
-    '$2a$12$ECMg5WEsp8Hq/jDg1KQ3ZuJ/MMETqnPBYkfIRHAGMr5KpeMlpOEIy',  -- 비밀번호
+    '{bcrypt}$2a$12$ECMg5WEsp8Hq/jDg1KQ3ZuJ/MMETqnPBYkfIRHAGMr5KpeMlpOEIy',  -- 비밀번호
     '010-1234-4567',                  -- 전화번호
     'MALE',                            -- 성별
     '1997-10-23',                      -- 생년월일
