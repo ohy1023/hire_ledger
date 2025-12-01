@@ -21,7 +21,7 @@ public class Employer {
     private LocalDate birthDate;
     private String tel;
     private Gender gender;
-    private String type;
+    private String employerType;
     private String note;
     private Long accountId;
     private Long addressId;

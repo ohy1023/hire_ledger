@@ -33,7 +33,6 @@ import static com.example.hireledger.exception.ErrorCode.*;
 @RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
 
-    private final PasswordEncoder passwordEncoder;
     private final AccountRepository accountRepository;
     private final AddressRepository addressRepository;
     private final RoleRepository roleRepository;
@@ -122,7 +121,7 @@ public class AccountServiceImpl implements AccountService {
      * @return 주소 엔티티
      */
     private Address findAddressById(Long addressId) {
-        return addressRepository.findById(addressId);
+        return addressRepository.findById(addressId).orElseThrow(() -> new AppException(ADDRESS_NOT_FOUND));
     }
 
     /**

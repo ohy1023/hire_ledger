@@ -19,6 +19,8 @@ public enum ErrorCode {
 
     // 404 Not Found
     ACCOUNT_NOT_FOUND(HttpStatus.NOT_FOUND, "계정을 찾을 수 없습니다."),
+    ADDRESS_NOT_FOUND(HttpStatus.NOT_FOUND, "주소를 찾을 수 없습니다."),
+    EMPLOYER_NOT_FOUND(HttpStatus.NOT_FOUND, "고용주를 찾을 수 없습니다."),
     RESOURCE_NOT_FOUND(HttpStatus.NOT_FOUND, "요청한 리소스를 찾을 수 없습니다."),
 
     // 409 Conflict

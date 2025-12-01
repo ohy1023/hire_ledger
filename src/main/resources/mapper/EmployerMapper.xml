@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.hireledger.mapper.EmployerMapper">
+
+    <!-- 고용주 저장 -->
+    <insert id="save"
+            parameterType="com.example.hireledger.domain.entity.Employer"
+            useGeneratedKeys="true"
+            keyProperty="id">
+
+        INSERT INTO employer (
+            uid,
+            name,
+            birth_date,
+            tel,
+            gender,
+            employer_type,
+            note,
+            account_id,
+            address_id
+        ) VALUES (
+            #{uid},
+            #{name},
+            #{birthDate},
+            #{tel},
+            #{gender},
+            #{type},
+            #{note},
+            #{accountId},
+            #{addressId}
+        )
+
+    </insert>
+
+    <!-- accountId와 UUID로 고용주 조회 -->
+    <select id="findByAccountIdAndUuid" resultType="com.example.hireledger.domain.entity.Employer">
+        SELECT
+            id,
+            uid,
+            name,
+            birth_date,
+            tel,
+            gender,
+            employer_type,
+            note,
+            account_id,
+            address_id,
+            created_at,
+            updated_at,
+            deleted_at
+        FROM employer
+        WHERE account_id = #{accountId}
+        AND uid = #{uuid}
+        AND deleted_at IS NULL
+    </select>
+
+    <!-- 계정별 고용주 조회 (페이징) -->
+    <select id="findByAccountIdWithPaging" resultType="com.example.hireledger.domain.entity.Employer">
+        SELECT
+        id,
+        uid,
+        name,
+        birth_date,
+        tel,
+        gender,
+        employer_type,
+        note,
+        account_id,
+        address_id,
+        created_at,
+        updated_at,
+        deleted_at
+        FROM employer
+        WHERE account_id = #{accountId} AND deleted_at IS NULL
+        ORDER BY created_at DESC
+        LIMIT #{size} OFFSET #{offset}
+    </select>
+
+    <!-- 계정별 총 레코드 수 -->
+    <select id="countByAccountId" resultType="long">
+        SELECT COUNT(*)
+        FROM employer
+        WHERE account_id = #{accountId} AND deleted_at IS NULL
+    </select>
+
+    <select id="findByIds" resultType="com.example.hireledger.domain.entity.Address">
+        SELECT *
+        FROM address
+        WHERE id IN
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+</mapper>
+
